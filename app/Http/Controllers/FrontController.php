@@ -15,4 +15,8 @@ class FrontController extends Controller
     public function login(){
     	return view('login');
     }
+
+    public function addBarang(){
+    	return view('barang.add');
+    }
 }

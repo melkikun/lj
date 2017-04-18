@@ -15,5 +15,7 @@ Auth::routes();
 Route::get('/', 'FrontController@login');
 Route::get('/home', 'HomeController@index')->name("home");
 Route::post("login", 'UserController@login')->name("user.login");
+Route::get('barang/add', 'FrontController@addBarang')->name("barang.add");
+
 
 

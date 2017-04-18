@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('title')
-    LJ|Dashboard
+    Dashboard
 @stop
 @section('js')
     {{-- expr --}}

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <!-- Title -->
-        <title>@yield('title')</title>
+        <title> LJ | @yield('title')</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -10,13 +10,12 @@
         <meta name="keywords" content="admin,dashboard" />
         <meta name="author" content="Steelcoders" />
         <!-- Styles -->
-        <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
+        {{-- <link type="text/css" rel="stylesheet" href="{{ asset('/') }}assets/bower_components/bootstrap/dist/css/bootstrap.min.css"/> --}}
+        <link type="text/css" rel="stylesheet" href="{{ asset('/') }}assets/plugins/materialize/css/materialize.min.css"/>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
-        <link href="assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet">
-        <link href="assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet">
         <!-- Theme Styles -->
-        <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('/') }}assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('/') }}assets/css/custom.css" rel="stylesheet" type="text/css"/>
         @yield('css')
     </head>
     <body>
@@ -29,22 +28,12 @@
         <div class="left-sidebar-hover"></div>
 
         <!-- Javascripts -->
-        <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-        <script src="assets/plugins/materialize/js/materialize.min.js"></script>
-        <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-        <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-        <script src="assets/plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="assets/plugins/counter-up-master/jquery.counterup.min.js"></script>
-        <script src="assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <script src="assets/plugins/chart.js/chart.min.js"></script>
-        <script src="assets/plugins/flot/jquery.flot.min.js"></script>
-        <script src="assets/plugins/flot/jquery.flot.time.min.js"></script>
-        <script src="assets/plugins/flot/jquery.flot.symbol.min.js"></script>
-        <script src="assets/plugins/flot/jquery.flot.resize.min.js"></script>
-        <script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
-        <script src="assets/plugins/curvedlines/curvedLines.js"></script>
-        <script src="assets/plugins/peity/jquery.peity.min.js"></script>
-        <script src="assets/js/alpha.min.js"></script>
-        <script src="assets/js/pages/dashboard.js"></script>
+        <script src="{{ asset('/') }}assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+        {{-- <script src="{{ asset('/') }}assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> --}}
+        <script src="{{ asset('/') }}assets/plugins/materialize/js/materialize.min.js"></script>
+        <script src="{{ asset('/') }}assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+        <script src="{{ asset('/') }}assets/js/alpha.min.js"></script>
+        <script src="{{ asset('/') }}assets/js/pages/dashboard.js"></script>
+        @yield('js')
     </body>
 </html>
