@@ -10,12 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Auth::routes();
-Route::get('/', 'FrontController@login');
-Route::get('/home', 'HomeController@index')->name("home");
-Route::post("login", 'UserController@login')->name("user.login");
-Route::get('barang/add', 'FrontController@addBarang')->name("barang.add");
+//autentifikasi login laravel menggunakan route
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
+//user ketika login atau belum
+Route::get('login', function(){
+	return view('pages.login.login');
+})->name('login');
+//router post login
+Route::post('login', 'UserController@cekLogin');
 
-
-
+//route wajib login
+Route::group(['middleware' => 'auth'], function () {
+	//
+    Route::get('barang/tambah', 'BarangController@addBarang')->name('sidebar.barang.tambah');
+    Route::get('barang/list', 'BarangController@lihatBarang')->name('sidebar.barang.lihat');
+    Route::post('barang/tambah', 'BarangController@submitBarang')->name('submit.barang');
+});
