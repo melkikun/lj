@@ -15,9 +15,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 //user ketika login atau belum
-Route::get('login', function(){
-	return view('pages.login.login');
-})->name('login');
+Route::get('login', 'HomeController@index')->name('login');
 //router post login
 Route::post('login', 'UserController@cekLogin');
 
@@ -27,4 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('barang/tambah', 'BarangController@addBarang')->name('sidebar.barang.tambah');
     Route::get('barang/list', 'BarangController@lihatBarang')->name('sidebar.barang.lihat');
     Route::post('barang/tambah', 'BarangController@submitBarang')->name('submit.barang');
+
+    Route::get('warna/get', 'WarnaController@getWarna')->name("get.warna");
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

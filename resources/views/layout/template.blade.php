@@ -17,21 +17,6 @@
 
     <!-- /custom css -->
     @yield('css')
-
-    <!-- Core JS files -->
-    <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="{{asset('/')}}assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="{{asset('/')}}assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/loaders/blockui.min.js"></script>
-    <!-- /core JS files -->
-
-    <!-- Theme JS files -->
-    @yield('js')
-
-
-    <script type="text/javascript" src="{{asset('/')}}assets/js/core/app.js"></script>
-    <!-- /theme JS files -->
-
 </head>
 
 <body>
@@ -60,17 +45,31 @@
 
                    @yield('content')
 
-                </div>
-                <!-- /content area -->
+               </div>
+               <!-- /content area -->
 
-            </div>
-            <!-- /main content -->
+           </div>
+           <!-- /main content -->
 
-        </div>
-        <!-- /page content -->
+       </div>
+       <!-- /page content -->
 
-    </div>
-    <!-- /page container -->
+   </div>
+   <!-- /page container -->
 
+   <!-- javascript plugin -->
+   <!-- Core JS files -->
+   <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/loaders/pace.min.js"></script>
+   <script type="text/javascript" src="{{asset('/')}}assets/js/core/libraries/jquery.min.js"></script>
+   <script type="text/javascript" src="{{asset('/')}}assets/js/core/libraries/bootstrap.min.js"></script>
+   <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/loaders/blockui.min.js"></script>
+   <!-- /core JS files -->
+
+   <!-- Theme JS files -->
+   @yield('js')
+   <script type="text/javascript" src="{{asset('/')}}assets/js/core/app.js"></script>
+   <!-- /theme JS files -->
+   <!-- /coding js-->
+   @yield('javascript')
 </body>
 </html>
