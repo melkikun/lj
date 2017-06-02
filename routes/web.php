@@ -25,8 +25,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('barang/tambah', 'BarangController@addBarang')->name('sidebar.barang.tambah');
     Route::get('barang/list', 'BarangController@lihatBarang')->name('sidebar.barang.lihat');
     Route::post('barang/tambah', 'BarangController@submitBarang')->name('submit.barang');
-
+    Route::delete('barang/delete/{id}', 'BarangController@deleteBarang')->name("delete.barang");
     Route::get('warna/get', 'WarnaController@getWarna')->name("get.warna");
+
+    //customer
+    Route::get('customer/tambah', 'CustomerController@addCustomer')->name('sidebar.customer.tambah');
+    Route::get('customer/list', 'CustomerController@lihatCustomer')->name('sidebar.customer.lihat');
+    Route::post('customer/tambah', 'CustomerController@submitCustomer')->name("submit.customer");
+    Route::delete('customer/delete/{id}', 'CustomerController@deleteCustomer')->name("delete.customer");
 });
 Auth::routes();
 

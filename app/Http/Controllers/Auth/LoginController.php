@@ -51,8 +51,8 @@ class LoginController extends Controller
         return view('pages.login.login');
     }
 
-    public function user_name()
+    public function username()
     {
-        return 'user_name';
+        return 'username';
     }
 }

@@ -18,7 +18,8 @@ class BarangController extends Controller
     }
 
     public function lihatBarang(){
-    	return view('pages.barang.list');
+        $barang  = $this->bsi->listBarang();
+    	return view('pages.barang.list')->with(["barang"=>$barang]);
     }
 
     public function submitBarang(\App\Http\Requests\BarangRequest $br){
@@ -50,5 +51,14 @@ class BarangController extends Controller
             );
         $response =  $this->bsi->addBarang($request);
         return redirect()->back()->with(["response"=>$response]);
+    }
+
+    public function deleteBarang($id){
+        $response = $this->bsi->deleteBarang($id);
+        if($response == 1){
+           return redirect()->back()->with(['delete'=>$response]);
+        }else{
+            echo "Something Wrong Bro!!!!";
+        }
     }
 }
