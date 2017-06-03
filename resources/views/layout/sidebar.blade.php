@@ -45,7 +45,7 @@
                     <li>
                         <a href="#"><i class="fa fa-money"></i> <span>Invoice</span></a>
                         <ul>
-                            <li><a href="{{ route('sidebar.barang.tambah') }}">Tambah Invoice</a></li>
+                            <li><a href="{{ route('sidebar.invoice.tambah') }}">Tambah Invoice</a></li>
                             <li><a href="{{ route('sidebar.barang.lihat') }}">Lihat Invoice</a></li>
                             <li><a href="{{ route('sidebar.barang.lihat') }}">Edit Invoice</a></li>
                         </ul>

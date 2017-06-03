@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/list', 'CustomerController@lihatCustomer')->name('sidebar.customer.lihat');
     Route::post('customer/tambah', 'CustomerController@submitCustomer')->name("submit.customer");
     Route::delete('customer/delete/{id}', 'CustomerController@deleteCustomer')->name("delete.customer");
+
+    //invoice
+    Route::get('invoice/tambah', 'InvoiceController@addInvoice')->name('sidebar.invoice.tambah');
 });
 Auth::routes();
 
