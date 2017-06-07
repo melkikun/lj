@@ -35,7 +35,7 @@
                             <ul class="navigation navigation-main navigation-accordion">
 
                                 <!-- Main -->
-                                <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                <li class="navigation-header"><span>Dashboard</span> <i class="icon-menu" title="Main pages"></i></li>
                                 <li class="active"><a href="index.html"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                                 <!-- /main -->
 
@@ -44,8 +44,8 @@
                                 <li>
                                     <a href="#"><i class="icon-stack2"></i> <span>Barang</span></a>
                                     <ul>
-                                        <li><a href="#">Tambah Barang</a></li>
-                                        <li><a href="#">Lihat Barang</a></li>
+                                        <li><a href="{{ route('sidebar.barang.tambah') }}">Tambah Barang</a></li>
+                                        <li><a href="{{ route('sidebar.barang.lihat') }}">Lihat Barang</a></li>
                                     </ul>
                                 </li>
                                 <li>
