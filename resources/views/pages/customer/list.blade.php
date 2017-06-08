@@ -4,12 +4,20 @@ LJ | LIST CUSTOMER
 @endsection
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('/') }}assets/js/plugins/sweet-alert/sweetalert.css">
+<style type="text/css">
+	table > tbody > tr > td {
+		font-size: 12px !important;
+	}
+	table > thead > tr > th {
+		font-size: 12px !important;
+	}
+</style>
 @endsection
-@section('js')
+@section('main-js')
 <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/tables/datatables/datatables.min.js"></script>
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/sweet-alert/sweetalert.min.js"></script>
 @endsection
-@section('javascript')
+@section('custom-js')
 <script>
 	jQuery(document).ready(function($) {
 	// Setting datatable defaults
@@ -36,26 +44,17 @@ LJ | LIST CUSTOMER
 	// Basic datatable
 	$('.datatable-basic').DataTable({
 		"paging":   false,
-		// "columnDefs": [
-		// { "visible": false, "targets": 0 }
-		// ],
+		"columnDefs": [
+		{"targets": 0, "width":"10%" },
+		{"targets": 1, "width":"5%" },
+		{"targets": 2, "width":"15%" },
+		{"targets": 3, "width":"20%" },
+		{"targets": 4, "width":"20%" },
+		{"targets": 5, "width":"20%" },
+		{"targets": 6, "width":"5%" },
+		{"targets": 7, "width":"5%" },
+		],
 		"order": [[ 0, 'asc' ]],
-		// "scrollX": true
-		// "drawCallback": function ( settings ) {
-		// 	var api = this.api();
-		// 	var rows = api.rows( {page:'current'} ).nodes();
-		// 	var last=null;
-
-		// 	api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-		// 		if ( last !== group ) {
-		// 			$(rows).eq( i ).before(
-		// 				'<tr class="group"><td colspan="7" style="color:red; background-color:aqua;"><b><i>'+group+'</i></b></td></tr>'
-		// 				);
-
-		// 			last = group;
-		// 		}
-		// 	} );
-		// }
 	});
 });
 	@if (Session::has("delete"))
@@ -80,7 +79,7 @@ LJ | LIST CUSTOMER
 			</ul>
 		</div>
 	</div>
-	<table class="table datatable-basic table-bordered dataTable no-footer" cellspacing="0" width="100%">
+	<table class="table datatable-basic" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th class="text-center">Nama Toko</th>
@@ -105,49 +104,63 @@ LJ | LIST CUSTOMER
 				<td class="text-left">
 					{{$value['cust_addr1']}}
 					@if ($value['cust_addr2']!="")
-						<br>{{$value['cust_addr2']}}
+					<br>{{$value['cust_addr2']}}
 					@endif
 					@if ($value['cust_addr3']!="")
-						<br>{{$value['cust_addr3']}}
+					<br>{{$value['cust_addr3']}}
 					@endif
 					
 				</td>
-				<td class="text-left">
+				<td class="text-center">
 					@if ($value['cust_telephone1']!="")
-						{{$value['cust_telephone1']}}
+					{{$value['cust_telephone1']}}
 					@endif
 					@if ($value['cust_telephone2']!="")
-						<br>{{$value['cust_telephone2']}}
+					<br>{{$value['cust_telephone2']}}
 					@endif
 					@if ($value['cust_telephone3']!="")
-						<br>{{$value['cust_telephone3']}}
+					<br>{{$value['cust_telephone3']}}
+					@endif
+					@if ($value['cust_telephone3']=="" && $value['cust_telephone2']=="" && $value['cust_telephone1'] == "")
+					<span class="col-sm-12 text-center">-</span>
 					@endif
 				</td>
-				<td class="text-left">
+				<td class="text-center">
 					@if ($value['cust_phone1']!="")
-						{{$value['cust_phone1']}}
+					{{$value['cust_phone1']}}
 					@endif
 					@if ($value['cust_phone2']!="")
-						<br>{{$value['cust_phone2']}}
+					<br>{{$value['cust_phone2']}}
+					@endif
+					@if ($value['cust_phone2']=="" && $value['cust_phone2']=="")
+					<span class="col-sm-12 text-center">-</span>
 					@endif
 				</td>
-				<td class="text-left">
+				<td class="text-center">
 					@if ($value['cust_person1']!="")
-						<br>{{$value['cust_person1']}}
+					<br>{{$value['cust_person1']}}
 					@endif
 					@if ($value['cust_person2']!="")
-						<br>{{$value['cust_person2']}}
+					<br>{{$value['cust_person2']}}
+					@endif
+					@if ($value['cust_person1']=="" && $value['cust_person2']=="")
+					<span class="col-sm-12 text-center">-</span>
 					@endif
 				</td>
 				<td class="text-left">
+					@if ($value['cust_misc_info'] != "")
 					{{$value['cust_misc_info']}}
+					@else
+					<span class="col-sm-12 text-center">-</span>
+					@endif
+					
 				</td>
 				<td class="text-center">
 					<div class="input-group col-sm-12" style="display: inline-flex;">
 						{!! Form::open(["method"=>"delete",'route'=>['delete.customer', $value['cust_id']], "id"=>"form-delete-customer", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
-						<button class="btn btn-info btn-xs" type="submit"><i class="fa fa-trash"></i></button>
+						<button class="btn btn-info btn-xs" type="submit"><i class="icon-trash"></i></button>
 						{!! Form::close() !!}
-						<button class="btn btn-warning btn-xs" type="button"><i class="fa fa-edit"></i></button>
+						<button class="btn btn-warning btn-xs" type="button"><i class="icon-folder5"></i></button>
 					</div><!-- /input-group -->
 				</td>
 			</tr>

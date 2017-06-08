@@ -3,17 +3,16 @@
 LJ | TAMBAH CUSTOMER
 @endsection
 @section('css')
-
 <link rel="stylesheet" type="text/css" href="{{ asset('/') }}assets/js/plugins/sweet-alert/sweetalert.css">
 @endsection
-@section('js')
+@section('main-js')
 
 <script type="text/javascript" src="{{asset('/')}}assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/forms/selects/select2.min.js"></script>
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/autonumeric/autoNumeric.min.js"></script>
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/sweet-alert/sweetalert.min.js"></script>
 @endsection
-@section('javascript')
+@section('custom-js')
 <script type="text/javascript">
 	@if (Session::has('insert'))
 	@if (Session::get('insert') == 1)
@@ -43,10 +42,7 @@ LJ | TAMBAH CUSTOMER
 				<div class="row">
 					<div class="form-group col-sm-12">
 						<label class="display-block text-semibold">NAMA CUSTOMER</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input class="form-control"  type="text" id="nama" name="nama" value="{{old('nama')}}"  placeholder="Contoh: Jl. Mustafa 200">
-						</div>
+						<input class="form-control"  type="text" id="nama" name="nama" value="{{old('nama')}}"  placeholder="Contoh: Jl. Mustafa 200">
 						@if (count($errors->get('nama')) > 0)
 						@foreach ($errors->get('nama') as $value)
 						<label id="basic-error" class="validation-error-label" for="basic">{{$value}}</label>
@@ -57,10 +53,8 @@ LJ | TAMBAH CUSTOMER
 				<div class="row">
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">ALAMAT 1</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-							<input class="form-control"  type="text" id="alamat1" name="alamat1" value="{{old('alamat1')}}"  placeholder="Contoh: Jl. Mustafa 200">
-						</div>
+						
+						<input class="form-control"  type="text" id="alamat1" name="alamat1" value="{{old('alamat1')}}"  placeholder="Contoh: Jl. Mustafa 200">
 						@if (count($errors->get('alamat1')) > 0)
 						@foreach ($errors->get('alamat1') as $value)
 						<label id="basic-error" class="validation-error-label" for="basic">{{$value}}</label>
@@ -69,26 +63,17 @@ LJ | TAMBAH CUSTOMER
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">ALAMAT 2</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-							<input class="form-control"  type="text" id="alamat2" name="alamat2" value="{{old('alamat2')}}"  placeholder="Contoh: Jl. Mustafa 200">
-						</div>
+						<input class="form-control"  type="text" id="alamat2" name="alamat2" value="{{old('alamat2')}}"  placeholder="Contoh: Jl. Mustafa 200">
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">ALAMAT 3</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-							<input class="form-control"  type="text" id="alamat3" name="alamat3" value="{{old('alamat3')}}"  placeholder="Contoh: Jl. Mustafa 200">
-						</div>
+						<input class="form-control"  type="text" id="alamat3" name="alamat3" value="{{old('alamat3')}}"  placeholder="Contoh: Jl. Mustafa 200">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">KOTA / KABUPATEN</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-building"></i></span>
-							<input class="form-control"  type="text" id="kota" name="kota" value="{{old('kota')}}"  placeholder="Contoh: GRESIK">
-						</div>
+						<input class="form-control"  type="text" id="kota" name="kota" value="{{old('kota')}}"  placeholder="Contoh: GRESIK">
 						@if (count($errors->get('kota')) > 0)
 						@foreach ($errors->get('kota') as $value)
 						<label id="basic-error" class="validation-error-label" for="basic">{{$value}}</label>
@@ -97,10 +82,7 @@ LJ | TAMBAH CUSTOMER
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">PROVINSI</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-slideshare"></i></span>
-							<input class="form-control"  type="text" id="provinsi" name="provinsi" value="{{old('provinsi')}}"  placeholder="Contoh: JAWA TIMUR">
-						</div>
+						<input class="form-control"  type="text" id="provinsi" name="provinsi" value="{{old('provinsi')}}"  placeholder="Contoh: JAWA TIMUR">
 						@if (count($errors->get('provinsi')) > 0)
 						@foreach ($errors->get('provinsi') as $value)
 						<label id="basic-error" class="validation-error-label" for="basic">{{$value}}</label>
@@ -111,88 +93,55 @@ LJ | TAMBAH CUSTOMER
 				<div class="row">
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">NO TELEPON 1</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-							<input class="form-control"  type="text" id="telepon1" name="telepon1" value="{{old('telepon1')}}"  placeholder="Contoh: 031456789">
-						</div>
+						<input class="form-control"  type="text" id="telepon1" name="telepon1" value="{{old('telepon1')}}"  placeholder="Contoh: 031456789">
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">NO TELEPON 2</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-							<input class="form-control"  type="text" id="telepon2" name="telepon2" value="{{old('telepon2')}}"  placeholder="Contoh: 031456789">
-						</div>
+						<input class="form-control"  type="text" id="telepon2" name="telepon2" value="{{old('telepon2')}}"  placeholder="Contoh: 031456789">
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="display-block text-semibold">NO TELEPON 3</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-							<input class="form-control"  type="text" id="telepon3" name="telepon3" value="{{old('telepon3')}}"  placeholder="Contoh: 031456789">
-						</div>
+						<input class="form-control"  type="text" id="telepon3" name="telepon3" value="{{old('telepon3')}}"  placeholder="Contoh: 031456789">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">NO HP 1</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-							<input class="form-control"  type="text" id="hp1" name="hp1" value="{{old('hp1')}}"  placeholder="Contoh: 0856321987">
-						</div>
+						<input class="form-control"  type="text" id="hp1" name="hp1" value="{{old('hp1')}}"  placeholder="Contoh: 0856321987">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">NO HP 2</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-							<input class="form-control"  type="text" id="hp2" name="hp2" value="{{old('hp2')}}"  placeholder="Contoh: 0856321987">
-						</div>
+						<input class="form-control"  type="text" id="hp2" name="hp2" value="{{old('hp2')}}"  placeholder="Contoh: 0856321987">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">CONTACT PERSON 1</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-users"></i></span>
-							<input class="form-control"  type="text" id="cp1" name="cp1" value="{{old('cp1')}}"  placeholder="Contoh: mike">
-						</div>
+						<input class="form-control"  type="text" id="cp1" name="cp1" value="{{old('cp1')}}"  placeholder="Contoh: mike">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">CONTACT PERSON 2</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-users"></i></span>
-							<input class="form-control"  type="text" id="cp2" name="cp2" value="{{old('cp2')}}"  placeholder="Contoh: mike">
-						</div>
+						<input class="form-control"  type="text" id="cp2" name="cp2" value="{{old('cp2')}}"  placeholder="Contoh: mike">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">FAKSIMILE</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-fax"></i></span>
-							<input class="form-control"  type="text" id="fax" name="fax" value="{{old('fax')}}"  placeholder="Contoh: 031 245689">
-						</div>
+						<input class="form-control"  type="text" id="fax" name="fax" value="{{old('fax')}}"  placeholder="Contoh: 031 245689">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">EMAIL</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-							<input class="form-control"  type="text" id="email" name="email" value="{{old('email')}}"  placeholder="Contoh: lj@gmail.com">
-						</div>
+						<input class="form-control"  type="text" id="email" name="email" value="{{old('email')}}"  placeholder="Contoh: lj@gmail.com">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">TERM OF PAY</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-money"></i></span>
-							<input class="form-control"  type="text" id="top" name="top" value="{{old('top')}}"  placeholder="Contoh: 10">
-						</div>
+						<input class="form-control"  type="text" id="top" name="top" value="{{old('top')}}"  placeholder="Contoh: 10">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="display-block text-semibold">INFORMASI TAMBAHAN</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-plus-square"></i></span>
-							<input class="form-control"  type="text" id="remark" name="remark" value="{{old('remark')}}"  placeholder="Contoh: Toko Terbaik">
-						</div>
+						<input class="form-control"  type="text" id="remark" name="remark" value="{{old('remark')}}"  placeholder="Contoh: Toko Terbaik">
 					</div>
 				</div>
 				<div class="row">

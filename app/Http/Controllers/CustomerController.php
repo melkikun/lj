@@ -15,12 +15,14 @@ class CustomerController extends Controller
     }
 
     function addCustomer(){
-    	return view('pages.customer.add');
+        $current = "TAMBAH CUSTOMER";
+    	return view('pages.customer.add', compact('current'));
     }
 
     function lihatCustomer(){
+         $current = "LIHAT CUSTOMER";
         $customer = $this->cs->listCustomer();
-    	return view('pages.customer.list')->with(['customer'=>$customer]);
+    	return view('pages.customer.list', compact('current', 'customer'));
     }
 
     function submitCustomer(\App\Http\Requests\CustomerRequest $request){

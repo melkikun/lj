@@ -14,12 +14,14 @@ class BarangController extends Controller
     }
 
     public function addBarang(){
-    	return view('pages.barang.add');
+        $current = "TAMBAH BARANG";
+    	return view('pages.barang.add_barang', compact('current'));
     }
 
     public function lihatBarang(){
+        $current = "LIHAT BARANG";
         $barang  = $this->bsi->listBarang();
-    	return view('pages.barang.list')->with(["barang"=>$barang]);
+    	return view('pages.barang.list_barang', compact('current', 'barang'));
     }
 
     public function submitBarang(\App\Http\Requests\BarangRequest $br){

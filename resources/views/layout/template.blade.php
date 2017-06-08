@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+    <title>Lautan Jati Dummy</title>
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -13,6 +13,8 @@
     <link href="{{ asset('/') }}assets/css/core.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('/') }}assets/css/components.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('/') }}assets/css/colors.css" rel="stylesheet" type="text/css">
+
+    @yield('css')
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->

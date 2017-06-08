@@ -5,57 +5,58 @@ LJ | LIST BARANG
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('/') }}assets/js/plugins/sweet-alert/sweetalert.css">
 @endsection
-@section('js')
-<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/tables/datatables/datatables.min.js"></script>
+@section('main-js')
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/sweet-alert/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/tables/datatables/datatables.min.js"></script>
+{{-- <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/forms/selects/select2.min.js"></script> --}}
+<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/ui/ripple.min.js"></script>
 @endsection
-@section('javascript')
+@section('custom-js')
+{{-- <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/datatables_basic.js"></script> --}}
 <script>
 	jQuery(document).ready(function($) {
-	// Setting datatable defaults
-	$.extend( $.fn.dataTable.defaults, {
-		autoWidth: false,
-		columnDefs: [{ 
-			orderable: false,
-			width: '100px',
-			targets: [ 5 ]
-		}],
-		dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
-		language: {
-			search: '<span>Filter:</span> _INPUT_',
-			lengthMenu: '<span>Show:</span> _MENU_',
-			paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
-		},
-		drawCallback: function () {
-			$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
-		},
-		preDrawCallback: function() {
-			$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
-		}
-	});
-	// Basic datatable
-	$('.datatable-basic').DataTable({
-		"paging":   false,
-		"columnDefs": [
-		{ "visible": false, "targets": 0 }
-		],
-		"order": [[ 0, 'asc' ],[1, 'asc']],
-		"drawCallback": function ( settings ) {
-			var api = this.api();
-			var rows = api.rows( {page:'current'} ).nodes();
-			var last=null;
+   $.extend( $.fn.dataTable.defaults, {
+        autoWidth: false,
+        columnDefs: [{ 
+            orderable: false,
+            width: '100px',
+            targets: [ 5 ]
+        }],
+        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        language: {
+            search: '<span>Filter:</span> _INPUT_',
+            lengthMenu: '<span>Show:</span> _MENU_',
+            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+        },
+        drawCallback: function () {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+        },
+        preDrawCallback: function() {
+            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+        }
+    });
+    $('.datatable-basic').DataTable({
+    	"paging":false,
+    	 "columnDefs": [
+            { "visible": false, "targets": 0 }
+        ],
+    	"order":[[0, "asc"], ["1", "asc"]],
+    	"drawCallback": function ( settings ) {
+    		var api = this.api();
+    		var rows = api.rows( {page:'current'} ).nodes();
+    		var last=null;
 
-			api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-				if ( last !== group ) {
-					$(rows).eq( i ).before(
-						'<tr class="group"><td colspan="7" style="color:red; background-color:aqua;"><b><i>'+group+'</i></b></td></tr>'
-						);
+    		api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+    			if ( last !== group ) {
+    				$(rows).eq( i ).before(
+    					'<tr class="group"><td colspan="6">'+group+'</td></tr>'
+    					);
 
-					last = group;
-				}
-			} );
-		}
-	});
+    				last = group;
+    			}
+    		} );
+    	}
+    });
 });
 	@if (Session::has("delete"))
 	@if (Session::get("delete") == 1)
@@ -79,7 +80,7 @@ LJ | LIST BARANG
 			</ul>
 		</div>
 	</div>
-	<table class="table datatable-basic" cellspacing="0" width="100%">
+	<table class="table datatable-basic table-bordered table-striped" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th class="text-center">Satuan</th>
@@ -119,9 +120,9 @@ LJ | LIST BARANG
 				<td class="text-center">
 					<div class="input-group col-sm-12" style="display: inline-flex;">
 						{!! Form::open(["method"=>"delete",'route'=>['delete.barang', $value['inv_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
-						<button class="btn btn-info btn-xs" type="submit"><i class="fa fa-trash"></i></button>
+						<button class="btn btn-info btn-xs" type="submit"><i class="icon-trash"></i></button>
 						{!! Form::close() !!}
-						<button class="btn btn-warning btn-xs" type="button"><i class="fa fa-edit"></i></button>
+						<button class="btn btn-warning btn-xs" type="button"><i class="icon-folder5"></i></button>
 					</div><!-- /input-group -->
 				</td>
 			</tr>
