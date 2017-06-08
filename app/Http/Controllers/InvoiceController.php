@@ -15,6 +15,7 @@ class InvoiceController extends Controller
     public function addInvoice()
     {
     	# code...
-    	return view('pages.invoice.add_invoice');
+        $current = "TAMBAH INVOICE";
+    	return view('pages.invoice.add_invoice', compact('current'));
     }
 }
