@@ -21,11 +21,13 @@ Route::post('login', 'UserController@cekLogin');
 
 //route wajib login
 Route::group(['middleware' => 'auth'], function () {
-	//
+	//barang
     Route::get('barang/tambah', 'BarangController@addBarang')->name('sidebar.barang.tambah');
     Route::get('barang/list', 'BarangController@lihatBarang')->name('sidebar.barang.lihat');
     Route::post('barang/tambah', 'BarangController@submitBarang')->name('submit.barang');
     Route::delete('barang/delete/{id}', 'BarangController@deleteBarang')->name("delete.barang");
+    
+    //warna
     Route::get('warna/get', 'WarnaController@getWarna')->name("get.warna");
 
     //customer
@@ -36,6 +38,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //invoice
     Route::get('invoice/tambah', 'InvoiceController@addInvoice')->name('sidebar.invoice.tambah');
+    Route::get('invoice/list', 'InvoiceController@listInvoice')->name('sidebar.invoice.list');
+    Route::get('invoice/revisi', 'InvoiceController@revisiInvoice')->name('sidebar.invoice.revisi');
+
+    //kendaraan
+    Route::get('kendaraan/tambah', 'KendaraanController@addKendaraan')->name('sidebar.kendaraan.tambah');
+    Route::post('kendaraan/tambah', 'KendaraanController@submitKendaraan')->name('submit.kendaraan');
+    Route::get('kendaraan/list', 'KendaraanController@listKendaraan')->name('sidebar.kendaraan.list');
 });
 Auth::routes();
 

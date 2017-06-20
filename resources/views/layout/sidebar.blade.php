@@ -54,15 +54,15 @@
                         <a href="#"><i class="icon-cash3"></i> <span>Invoice</span></a>
                         <ul>
                             <li><a href="{{ route('sidebar.invoice.tambah') }}">Tambah Invoice</a></li>
-                            <li><a href="#">Lihat Invoice</a></li>
-                            <li><a href="#">Revisi Invoice</a></li>
+                            <li><a href="{{ route('sidebar.invoice.list') }}">Lihat Invoice</a></li>
+                            <li><a href="{{ route('sidebar.invoice.revisi') }}">Revisi Invoice</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="icon-truck"></i> <span>Kendaraan</span></a>
                         <ul>
-                            <li><a href="#">Tambah Kendaraan</a></li>
-                            <li><a href="#">Lihat Kendaraan</a></li>
+                            <li><a href="{{ route('sidebar.kendaraan.tambah') }}">Tambah Kendaraan</a></li>
+                            <li><a href="{{ route('sidebar.kendaraan.list') }}">Lihat Kendaraan</a></li>
                         </ul>
                     </li>
                     <li>

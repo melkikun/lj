@@ -22,7 +22,7 @@
 					</ul>
 				</div>
 			</div>
-
+			{!! Form::open(["route"=>"submit.barang", "onsubmit"=>"return confirm('apa anda yakin submit')"]) !!}
 			<div class="panel-body">
 				<div class="form-group">
 					<label class="display-block">Nama Barang</label>
@@ -89,7 +89,7 @@
 					</div>
 				</div>
 			</div>
-
+			{!! Form::close() !!}
 		</div>
 	</div>
 </div>
