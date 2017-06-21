@@ -69,7 +69,7 @@
                         <a href="#"><i class="icon-accessibility"></i> <span>User</span></a>
                         <ul>
                             <li><a href="#">Tambah User</a></li>
-                            <li><a href="#">Lihat User</a></li>
+                            <li><a href="{{ route('sidebar.user.list') }}">Lihat User</a></li>
                         </ul>
                     </li>
                     <li>

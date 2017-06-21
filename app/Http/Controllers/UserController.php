@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Services\UserService as us;
+use  Illuminate\View\View;
 class UserController extends Controller {
 
     private $request;
+    private $us;
 
-    function __construct(Request $request) {
+    function __construct(Request $request, us $us) {
         $this->request = $request;
+        $this->us = $us;
     }
 
     public function cekLogin(\App\Http\Requests\LoginRequest $lr) {
@@ -23,6 +26,13 @@ class UserController extends Controller {
         // }else{
         //     return redirect()->back()->withInput()->withErrors(['msg'=>'UserName Atau Password Anda Salah']);
         // }
+    }
+
+    public function listUser():View{
+        $current = "LIST USER LAUTAN JATI";
+        $data = $this->us->listUser();
+        return view('pages.user.list_user', compact('current', 'data'));
+        // echo "123";
     }
 
 }

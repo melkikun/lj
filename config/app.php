@@ -180,6 +180,7 @@ return [
         App\Providers\WarnaServiceProvider::class,
         App\Providers\CustomerServiceProvider::class,
         App\Providers\InvoiceServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
             
 
 
