@@ -16,9 +16,9 @@ LJ | TAMBAH CUSTOMER
 <script type="text/javascript">
 	@if (Session::has('insert'))
 	@if (Session::get('insert') == 1)
-	swal("berhasil input", "success", "success");
+	alert("berhasil input");
 	@else
-	swal("gagal input", "error", "error");
+	alert("gagal input");
 	@endif
 	@endif
 </script>

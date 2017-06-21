@@ -9,6 +9,7 @@
 namespace App\Http\Services\Impl;
 use App\Transportasi as t;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 /**
  * Description of TransportServiceImpl
  *
@@ -23,7 +24,7 @@ class TransportServiceImpl implements \App\Http\Services\TransportService{
 	}
 
     //put your code here
-    public function add($request) {
+    public function add(array $request) : int {
         $jenis = $request['jenis'];
         $plat = $request['plat'];
         $kapasitas = $request['kapasitas'];
@@ -46,16 +47,23 @@ class TransportServiceImpl implements \App\Http\Services\TransportService{
 
     }
 
-    public function deleteTransport($id) {
-        
+    public function deleteTransport(int $id) : int{
+        $find = $this->t->find($id);
+        $delete = $find->delete();
+        return $delete;
     }
 
-    public function editTransport($id) {
-        
+    public function editTransport(int $id) : int {
+
     }
 
-    public function listTransport() {
+    public function listTransport() : Collection{
         return $this->t->all();
+    }
+
+    public function hello(int $a) : ?int{
+        $b = $a+"10";
+        return null;
     }
 
 }

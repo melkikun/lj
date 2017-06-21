@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\Impl\BarangServiceImpl as bsi;
-
+use App\Http\Services\BarangService as bsi;
+use App\Http\Services\WarnaService as wsi;
 class BarangController extends Controller
 {
     private $bsi;
-    function __construct(Request $request, bsi $bsi)
+    private $wsi;
+
+    function __construct(Request $request, bsi $bsi, wsi $wsi)
     {
         $this->bsi = $bsi;
+        $this->wsi = $wsi;
     }
 
     public function addBarang(){
         $current = "TAMBAH BARANG";
-    	return view('pages.barang.add_barang', compact('current'));
+        $warna = $this->wsi->listWarna();
+    	return view('pages.barang.add_barang', compact('current', 'warna'));
     }
 
     public function lihatBarang(){
@@ -51,8 +55,8 @@ class BarangController extends Controller
             "harga"=>$harga,
             "remark"=>$remark
             );
-        $response =  $this->bsi->addBarang($request);
-        return redirect()->back()->with(["response"=>$response]);
+        $save =  $this->bsi->addBarang($request);
+        return redirect()->back()->with(["save"=>$save]);
     }
 
     public function deleteBarang($id){

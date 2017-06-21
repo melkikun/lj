@@ -38,31 +38,31 @@ LJ | LIST BARANG
 		$('.datatable-basic').DataTable({
 			"paging":false,
 			"columnDefs": [
-            { "visible": false, "targets": 0 }
-            ],
-            "order":[[0, "asc"], ["1", "asc"]],
-    	"drawCallback": function ( settings ) {
-    		var api = this.api();
-    		var rows = api.rows( {page:'current'} ).nodes();
-    		var last=null;
+			{ "visible": false, "targets": 0 }
+			],
+			"order":[[0, "asc"], ["1", "asc"]],
+			"drawCallback": function ( settings ) {
+				var api = this.api();
+				var rows = api.rows( {page:'current'} ).nodes();
+				var last=null;
 
-    		api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-    			if ( last !== group ) {
-    				$(rows).eq( i ).before(
-    					'<tr class="group"><td colspan="6">'+group+'</td></tr>'
-    					);
+				api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+					if ( last !== group ) {
+						$(rows).eq( i ).before(
+							'<tr class="group"><td colspan="6">'+group+'</td></tr>'
+							);
 
-    				last = group;
-    			}
-    		} );
-    	}
-    });
+						last = group;
+					}
+				} );
+			}
+		});
 	});
 	@if (Session::has("delete"))
 	@if (Session::get("delete") == 1)
-	swal("berhasil delete", "success", "success");
+	alert("berhasil delete");
 	@else
-	swal("gagal delete", "error", "error");
+	alert("gagal delete");
 	@endif
 	@endif
 </script>
@@ -101,7 +101,11 @@ LJ | LIST BARANG
 					{{$element->transport_no}}
 				</td>
 				<td class="text-center">
+					@if ($element->transport_capacity == "")
+					-
+					@else
 					{{$element->transport_capacity}}
+					@endif
 				</td>
 				<td class="text-center">
 					{{$element->transport_drv}}
@@ -111,7 +115,7 @@ LJ | LIST BARANG
 				</td>
 				<td class="text-center">
 					<div class="input-group text-center" style="display: inline-flex;">
-						{!! Form::open(["method"=>"delete",'route'=>['delete.barang', $element['transport_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
+						{!! Form::open(["method"=>"delete",'route'=>['delete.kendaraan', $element['transport_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
 						<button class="btn btn-info btn-xs" type="submit"><i class="icon-trash"></i></button>
 						{!! Form::close() !!}
 						<button class="btn btn-warning btn-xs" type="button"><i class="icon-folder5"></i></button>

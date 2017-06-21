@@ -8,6 +8,20 @@
 <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/form_select2.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/form_layouts.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/ui/ripple.min.js"></script>
+<script type="text/javascript" src="{{asset('/')}}assets/js/plugins/autonumeric/autoNumeric.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('#garansi').autoNumeric();
+		$('#harga').autoNumeric();
+	});
+	@if (Session::has('save'))
+	@if (Session::get('save') == 1)
+		alert("Berhasil Insert");
+	@else
+		alert("Gagal Insert");
+	@endif
+	@endif
+</script>
 @endsection
 @section('content')
 <div class="row">
@@ -26,49 +40,39 @@
 			<div class="panel-body">
 				<div class="form-group">
 					<label class="display-block">Nama Barang</label>
-					<input type="text" class="form-control" placeholder="Contoh : A8">
+					<input type="text" class="form-control" placeholder="Contoh : A8" name="nama" value="{{old('nama')}}">
+					@if ($errors->has('nama'))
+					@foreach ($errors->get('nama') as $e)
+					<span class="help-block" style="color: #d84315">{{$e}}</span>
+					@endforeach
+					@endif
 				</div>
 				<div class="form-group">
 					<label class="display-block">Warna Barang</label>
-					<select class="select-border-color border-warning">
-						<optgroup label="Mountain Time Zone">
-							<option value="AZ">Arizona</option>
-							<option value="CO">Colorado</option>
-							<option value="ID">Idaho</option>
-							<option value="WY">Wyoming</option>
-						</optgroup>
-						<optgroup label="Central Time Zone">
-							<option value="AL">Alabama</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-						</optgroup>
-						<optgroup label="Eastern Time Zone">
-							<option value="CT">Connecticut</option>
-							<option value="FL">Florida</option>
-							<option value="MA">Massachusetts</option>
-							<option value="WV">West Virginia</option>
-						</optgroup>
+					<select class="select-border-color border-warning" name="warna">
+						@foreach ($warna as $w)
+						<option value="{{$w->nm_warna}}">{{$w->nm_warna}}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
-					<label class="display-block">Warna Barang</label>
+					<label class="display-block">Jenis Barang</label>
 					<label class="radio-inline">
-						<input type="radio" class="styled" name="gender" checked="checked">
+						<input type="radio" class="styled" name="jenis" checked="checked" value="K">
 						Kubikasi
 					</label>
 
 					<label class="radio-inline">
-						<input type="radio" class="styled" name="gender">
+						<input type="radio" class="styled" name="jenis" value="S">
 						Satuan
 					</label>
 				</div>
 				<div class="form-group">
 					<label>GARANSI</label>
 					<div class="input-group">
-						<input data-v-min="0" data-v-max="9999" class="autonumeric form-control" id="inv_wranty" value="0" type="text">
+						<input data-v-min="0" data-v-max="9999" class="autonumeric form-control" id="garansi" type="text" value="{{old('garansi')}}" name="garansi">
 						<span class="input-group-btn">
-							<select class="form-control" style="width: 90px;" id="inv_wranty_typ">
+							<select class="form-control" style="width: 90px;" id="type_garansi">
 								<option value="bulan">Bulan</option>
 								<option value="tahun">Tahun</option>                                            
 							</select>
@@ -77,11 +81,11 @@
 				</div>
 				<div class="form-group">
 					<label class="display-block">Harga Barang</label>
-					<input type="text" class="form-control" placeholder="Contoh : 120000">
+					<input type="text" class="form-control" placeholder="Contoh : 120000" name="harga" value="{{old('harga')}}">
 				</div>
 				<div class="form-group">
 					<label class="display-block">Keterangan</label>
-					<input type="text" class="form-control" placeholder="Contoh : barang bagus">
+					<input type="text" class="form-control" placeholder="Contoh : barang bagus" name="remark" value="{{old('remark')}}">
 				</div>
 				<div class="row">
 					<div class="form-group">

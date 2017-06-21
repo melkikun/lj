@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\Impl\UserServiceImpl as usi;
+
 class UserController extends Controller {
 
     private $request;

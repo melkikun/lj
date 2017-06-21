@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\Impl\CustomerServiceImpl as cs;
+use App\Http\Services\CustomerService as cs;
 class CustomerController extends Controller
 {
 	private $request;
@@ -68,7 +68,6 @@ class CustomerController extends Controller
 
     function deleteCustomer($id)
     {
-        // echo "$id";
         $response =  $this->cs->deleteCustomer($id);
         return redirect()->back()->with(['delete'=>$response]);
     }

@@ -171,6 +171,15 @@ return [
             Collective\Html\HtmlServiceProvider::class,
             Barryvdh\Debugbar\ServiceProvider::class,
 
+
+        /*
+         *Service dan implement untuk interface provider
+         */
+        App\Providers\KendaraanServiceProvider::class,
+        App\Providers\BarangServiceProvider::class,
+        App\Providers\WarnaServiceProvider::class,
+        App\Providers\CustomerServiceProvider::class,
+        App\Providers\InvoiceServiceProvider::class,
             
 
 

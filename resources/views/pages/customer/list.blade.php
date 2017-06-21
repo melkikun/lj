@@ -59,9 +59,9 @@ LJ | LIST CUSTOMER
 });
 	@if (Session::has("delete"))
 	@if (Session::get("delete") == 1)
-	swal("berhasil delete", "success", "success");
+	alert("berhasil delete");
 	@else
-	swal("gagal delete", "error", "error");
+	alert("gagal delete");
 	@endif
 	@endif
 </script>

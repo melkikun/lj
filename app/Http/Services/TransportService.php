@@ -7,17 +7,19 @@
  */
 
 namespace App\Http\Services;
-
+use Illuminate\Database\Eloquent\Collection;
 /**
  *
  * @author IT01
  */
 interface TransportService {
-    function add($request);
+    function add(array $request):int;
     
-    function editTransport($id);
+    function editTransport(int $id):int;
     
-    function deleteTransport($id);
+    function deleteTransport(int $id):int;
     
-    function listTransport();
+    function listTransport():Collection;
+
+    function hello(int $a):?int;
 }

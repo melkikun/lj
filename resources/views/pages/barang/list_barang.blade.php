@@ -15,54 +15,54 @@ LJ | LIST BARANG
 {{-- <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/datatables_basic.js"></script> --}}
 <script>
 	jQuery(document).ready(function($) {
-   $.extend( $.fn.dataTable.defaults, {
-        autoWidth: false,
-        columnDefs: [{ 
-            orderable: false,
-            width: '100px',
-            targets: [ 5 ]
-        }],
-        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
-        language: {
-            search: '<span>Filter:</span> _INPUT_',
-            lengthMenu: '<span>Show:</span> _MENU_',
-            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
-        },
-        drawCallback: function () {
-            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
-        },
-        preDrawCallback: function() {
-            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
-        }
-    });
-    $('.datatable-basic').DataTable({
-    	"paging":false,
-    	 "columnDefs": [
-            { "visible": false, "targets": 0 }
-        ],
-    	"order":[[0, "asc"], ["1", "asc"]],
-    	"drawCallback": function ( settings ) {
-    		var api = this.api();
-    		var rows = api.rows( {page:'current'} ).nodes();
-    		var last=null;
+		$.extend( $.fn.dataTable.defaults, {
+			autoWidth: false,
+			columnDefs: [{ 
+				orderable: false,
+				width: '100px',
+				targets: [ 5 ]
+			}],
+			dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+			language: {
+				search: '<span>Filter:</span> _INPUT_',
+				lengthMenu: '<span>Show:</span> _MENU_',
+				paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+			},
+			drawCallback: function () {
+				$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+			},
+			preDrawCallback: function() {
+				$(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+			}
+		});
+		$('.datatable-basic').DataTable({
+			"paging":false,
+			"columnDefs": [
+			{ "visible": false, "targets": 0 }
+			],
+			"order":[[0, "asc"], ["1", "asc"]],
+			"drawCallback": function ( settings ) {
+				var api = this.api();
+				var rows = api.rows( {page:'current'} ).nodes();
+				var last=null;
 
-    		api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-    			if ( last !== group ) {
-    				$(rows).eq( i ).before(
-    					'<tr class="group"><td colspan="6">'+group+'</td></tr>'
-    					);
+				api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+					if ( last !== group ) {
+						$(rows).eq( i ).before(
+							'<tr class="group"><td colspan="6">'+group+'</td></tr>'
+							);
 
-    				last = group;
-    			}
-    		} );
-    	}
-    });
-});
+						last = group;
+					}
+				} );
+			}
+		});
+	});
 	@if (Session::has("delete"))
 	@if (Session::get("delete") == 1)
-	swal("berhasil delete", "success", "success");
+	alert("berhasil delete");
 	@else
-	swal("gagal delete", "error", "error");
+	alert("gagal delete");
 	@endif
 	@endif
 </script>
@@ -112,10 +112,18 @@ LJ | LIST BARANG
 					Rp {{number_format($value['inv_prc'],2)}}
 				</td>
 				<td class="text-center">
-					{{$value['inv_wrty_dur']}} {{$value['inv_wrty_type']}}
+					@if ($value['inv_wrty_dur'] == "")
+					-
+					@else
+					{{$value['inv_wrty_dur']}} {{$value['inv_wrty_typ']}}
+					@endif
 				</td>
 				<td class="text-left">
+					@if ($value['inv_rem'] == "")
+					-
+					@else
 					{{$value['inv_rem']}}
+					@endif
 				</td>
 				<td class="text-center">
 					<div class="input-group col-sm-12" style="display: inline-flex;">
