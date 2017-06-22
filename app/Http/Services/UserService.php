@@ -12,7 +12,7 @@ namespace App\Http\Services;
  */
 interface UserService {
 
-    public function add(\App\User $user);
+    public function add(array $user);
 
     public function edit($id);
 

@@ -103,7 +103,7 @@ LJ | LIST USER
 				</td>
 				<td class="text-center">
 				<div class="input-group" style="display: inline-flex;">
-						{!! Form::open(["method"=>"delete",'route'=>['delete.barang', $value['inv_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
+						{!! Form::open(["method"=>"delete",'route'=>['delete.user', $value['user_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
 						<button class="btn btn-info btn-xs" type="submit"><i class="icon-trash"></i></button>
 						{!! Form::close() !!}
 						<button class="btn btn-warning btn-xs" type="button"><i class="icon-folder5"></i></button>

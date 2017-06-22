@@ -47,7 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('kendaraan/list', 'KendaraanController@listKendaraan')->name('sidebar.kendaraan.list');
     Route::delete('kendaraan/delete/{id}', 'KendaraanController@deleteKendaraan')->name("delete.kendaraan");
 
+    //user
+    Route::get('user/tambah', 'UserController@addUser')->name('sidebar.user.tambah');
+    Route::post('user/tambah', 'UserController@submitUser')->name('submit.user');
     Route::get('user/list', 'UserController@listUser')->name("sidebar.user.list");
+    Route::delete('user/delete/{id}', 'UserController@deleteUser')->name("delete.user");
 });
 Auth::routes();
 
