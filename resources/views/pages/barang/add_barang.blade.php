@@ -7,20 +7,22 @@
 @section('custom-js')
 <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/form_select2.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/form_layouts.js"></script>
-<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/ui/ripple.min.js"></script>
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/autonumeric/autoNumeric.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/notifications/sweet_alert.min.js"></script>
+<script type="text/javascript" src="{{ asset('/') }}assets/js/pages/components_modals.js"></script>
+<script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/ui/ripple.min.js"></script>
+<script>
 	jQuery(document).ready(function($) {
 		$('#garansi').autoNumeric();
 		$('#harga').autoNumeric();
+		@if (Session::has('save'))
+		@if (Session::get('save') == 1)
+		swal("Berhasil Insert", "", "success");
+		@else
+		swal("Gagal Insert", "", "error");
+		@endif
+		@endif
 	});
-	@if (Session::has('save'))
-	@if (Session::get('save') == 1)
-		alert("Berhasil Insert");
-	@else
-		alert("Gagal Insert");
-	@endif
-	@endif
 </script>
 @endsection
 @section('content')
@@ -72,7 +74,7 @@
 					<div class="input-group">
 						<input data-v-min="0" data-v-max="9999" class="autonumeric form-control" id="garansi" type="text" value="{{old('garansi')}}" name="garansi">
 						<span class="input-group-btn">
-							<select class="form-control" style="width: 90px;" id="type_garansi">
+							<select class="form-control" style="width: 90px;" id="type_garansi" name="type_garansi">
 								<option value="bulan">Bulan</option>
 								<option value="tahun">Tahun</option>                                            
 							</select>

@@ -1,4 +1,7 @@
 @extends('layout.template')
+@section('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('title')
 LJ | LIST BARANG
 @endsection
@@ -8,11 +11,9 @@ LJ | LIST BARANG
 @section('main-js')
 <script type="text/javascript" src="{{asset('/')}}assets/js/plugins/sweet-alert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/tables/datatables/datatables.min.js"></script>
-{{-- <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/forms/selects/select2.min.js"></script> --}}
 <script type="text/javascript" src="{{ asset('/') }}assets/js/plugins/ui/ripple.min.js"></script>
 @endsection
 @section('custom-js')
-{{-- <script type="text/javascript" src="{{ asset('/') }}assets/js/pages/datatables_basic.js"></script> --}}
 <script>
 	jQuery(document).ready(function($) {
 		$.extend( $.fn.dataTable.defaults, {
@@ -57,18 +58,102 @@ LJ | LIST BARANG
 				} );
 			}
 		});
+		@if (Session::has("delete"))
+		@if (Session::get("delete") == 1)
+		swal("berhasil delete", "", "success");
+		@else
+		swal("gagal delete", "", "error");
+		@endif
+		@endif
 	});
-	@if (Session::has("delete"))
-	@if (Session::get("delete") == 1)
-	alert("berhasil delete");
-	@else
-	alert("gagal delete");
-	@endif
-	@endif
+	function editInv (param) {
+		jQuery.ajax({
+			url: '{{ route('barang.getBarang') }}',
+			type: 'GET',
+			dataType: 'json',
+			data: {id: param},
+			beforeSend: function (xhr) {
+				/* body... */
+			},
+			complete: function(xhr, textStatus) {
+				$('#myModal').modal('show');
+			},
+			success: function(response, textStatus, xhr) {
+				$('input[name=nama]').val(response.inv_name);
+				$('input[name=warna]').val(response.inv_color);
+				$('input[name=garansi]').val(response.inv_wrty_dur);
+				$('input[name=harga]').val(response.inv_prc);
+				$('input[name=remark]').val(response.inv_rem);
+				$('select[name=type_garansi]').val(response.inv_wrty_typ);
+				if(response.inv_count_sys == "S"){
+					$('#s').prop("checked", true);
+				}else{
+					$('#k').prop("checked", true);
+				}
+				$('#id').val(response.inv_id);
+			},
+			error: function(xhr, textStatus, errorThrown) {
+		    //called when there is an error
+		}
+	});
+		
+	}
+
+	function submitData () {
+		var id = $('#id').val();
+		var nama = $('input[name=nama]').val();
+		var warna = $('input[name=warna]').val();
+		var garansi = $('input[name=garansi]').val();
+		var harga = $('input[name=harga]').val();
+		var remark = $('input[name=remark]').val();
+		var type_garansi = $('select[name=type_garansi]').val();
+		var jenis = $('input[name=jenis]:checked').val();
+
+		var request = {
+			id:id, 
+			nama:nama,
+			warna:warna,
+			garansi:garansi,
+			harga:harga,
+			remark:remark,
+			type_garansi:type_garansi,
+			jenis:jenis
+		};
+		if(nama != ""){
+			var cf = confirm("Apa anda yakin melakukan edit pada inventory ini?");
+			if(cf == true){
+				jQuery.ajax({
+					url: '{{ route('barang.patchBarang') }}',
+					type: 'patch',
+					dataType: 'json',
+					data: request,
+					headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+					complete: function(xhr, textStatus) {
+			    //called when complete
+			},
+			success: function(response, textStatus, xhr) {
+				if(response == true){
+					swal("berhasil update barang", "", "success");
+					window.location.reload();
+				}else{
+					swal("gagal update barang", "", "error");
+				}
+			},
+			error: function(xhr, textStatus, errorThrown) {
+			    //called when there is an error
+			}
+		});
+
+			}
+		}else{
+			swal("Tolong isikan nama barang", "", "error");
+		}
+
+		
+	}
 </script>
 @endsection
 @section('content')
-<!-- Basic datatable -->
 <div class="panel panel-flat">
 	<div class="panel-heading">
 		<h5 class="panel-title"><strong>Daftar Master Inventori PT. Lautan Jati</strong></h5>
@@ -130,7 +215,7 @@ LJ | LIST BARANG
 						{!! Form::open(["method"=>"delete",'route'=>['delete.barang', $value['inv_id']], "id"=>"form-delete-barang", "onsubmit"=>"return confirm('Apa anda yakin delete?')"]) !!}
 						<button class="btn btn-info btn-xs" type="submit"><i class="icon-trash"></i></button>
 						{!! Form::close() !!}
-						<button class="btn btn-warning btn-xs" type="button"><i class="icon-folder5"></i></button>
+						<button class="btn btn-warning btn-xs" type="button" onclick=editInv("{{$value['inv_id']}}")><i class="icon-folder5"></i></button>
 					</div><!-- /input-group -->
 				</td>
 			</tr>
@@ -138,5 +223,65 @@ LJ | LIST BARANG
 		</tbody>
 	</table>
 </div>
-<!-- /basic datatable -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title text-center" id="myModalLabel">Form Revisi Inventory Lautan Jati</h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="display-block">Nama Barang</label>
+						<input type="text" class="form-control" placeholder="Contoh : A8" name="nama" value="{{old('nama')}}">
+					</div>
+					<div class="form-group">
+						<label class="display-block">Warna Barang</label>
+						<input type="text" class="form-control" placeholder="Contoh : A8" name="warna" value="{{old('nama')}}">
+					</div>
+					<div class="form-group">
+						<label class="display-block">Jenis Barang</label>
+						<label class="radio-inline">
+							<input type="radio" class="styled" name="jenis" value="K" id="k">
+							Kubikasi
+						</label>
+
+						<label class="radio-inline">
+							<input type="radio" class="styled" name="jenis" value="S" id="s">
+							Satuan
+						</label>
+					</div>
+					<div class="form-group">
+						<label>GARANSI</label>
+						<div class="input-group">
+							<input data-v-min="0" data-v-max="9999" class="autonumeric form-control" id="garansi" type="text" value="{{old('garansi')}}" name="garansi">
+							<span class="input-group-btn">
+								<select class="form-control" style="width: 90px;" id="type_garansi" name="type_garansi">
+									<option value="bulan">Bulan</option>
+									<option value="tahun">Tahun</option>                                            
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="display-block">Harga Barang</label>
+						<input type="text" class="form-control" placeholder="Contoh : 120000" name="harga" value="{{old('harga')}}">
+					</div>
+					<div class="form-group">
+						<label class="display-block">Keterangan</label>
+						<input type="text" class="form-control" placeholder="Contoh : barang bagus" name="remark" value="{{old('remark')}}">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<input type="hidden" id="id" value="">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="submitData()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection

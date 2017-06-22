@@ -38,8 +38,26 @@ class BarangServiceImpl implements BarangService {
         return $save;
     }
 
-    function editBarang($id) {
-        
+    function editBarang($request) {
+        $id = $request['id'];
+        $nama = $request['nama'];
+        $warna = $request['warna'];
+        $jenis = $request['jenis'];
+        $garansi = $request['garansi'];
+        $type_garansi = $request['type_garansi'];
+        $harga = $request['harga'];
+        $remark = $request['remark'];
+        //proses menemukan id
+        $barang = $this->barang->find($id);
+        $barang->inv_name = $nama;
+        $barang->inv_count_sys = $jenis;
+        $barang->inv_wrty_dur = $garansi;
+        $barang->inv_rem = $remark;
+        $barang->inv_color = $warna;
+        $barang->inv_wrty_typ = $type_garansi;
+        $barang->inv_prc = $harga;
+        $edit = $barang->save();
+        return $edit;
     }
 
     function deleteBarang($id) {
@@ -50,6 +68,10 @@ class BarangServiceImpl implements BarangService {
 
     function listBarang() {
         return $this->barang->where('isactive', '1')->get();
+    }
+
+    function getBarang($id){
+        return $this->barang->where("inv_id", $id)->first();
     }
 
 }

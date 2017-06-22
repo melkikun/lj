@@ -26,7 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('barang/list', 'BarangController@lihatBarang')->name('sidebar.barang.lihat');
     Route::post('barang/tambah', 'BarangController@submitBarang')->name('submit.barang');
     Route::delete('barang/delete/{id}', 'BarangController@deleteBarang')->name("delete.barang");
-    
+    Route::get('barang/get', "BarangController@getBarang")->name("barang.getBarang");
+    Route::patch('barang/patch', 'BarangController@patchBarang')->name("barang.patchBarang");
     //warna
     Route::get('warna/get', 'WarnaController@getWarna')->name("get.warna");
 

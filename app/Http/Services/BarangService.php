@@ -5,9 +5,11 @@ interface BarangService{
 
 	function addBarang($request);
 
-	function editBarang($id);
+	function editBarang($request);
 
 	function deleteBarang($id);
 
 	function listBarang();
+
+	function getBarang($id);
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\BarangService as bsi;
 use App\Http\Services\WarnaService as wsi;
+
+use Illuminate\Http\JsonResponse;
+
 class BarangController extends Controller
 {
     private $bsi;
@@ -19,13 +22,13 @@ class BarangController extends Controller
     public function addBarang(){
         $current = "TAMBAH BARANG";
         $warna = $this->wsi->listWarna();
-    	return view('pages.barang.add_barang', compact('current', 'warna'));
+        return view('pages.barang.add_barang', compact('current', 'warna'));
     }
 
     public function lihatBarang(){
         $current = "LIHAT BARANG";
         $barang  = $this->bsi->listBarang();
-    	return view('pages.barang.list_barang', compact('current', 'barang'));
+        return view('pages.barang.list_barang', compact('current', 'barang'));
     }
 
     public function submitBarang(\App\Http\Requests\BarangRequest $br){
@@ -63,8 +66,39 @@ class BarangController extends Controller
         $response = $this->bsi->deleteBarang($id);
         if($response == 1){
            return redirect()->back()->with(['delete'=>$response]);
-        }else{
-            echo "Something Wrong Bro!!!!";
-        }
+       }else{
+        echo "Something Wrong Bro!!!!";
     }
+}
+
+public function getBarang(Request $request):JsonResponse{
+    if($request->ajax()){
+        $id = $request->input("id");
+        return response()->json($this->bsi->getBarang($id));
+    }
+}
+
+public function patchBarang(Request $r){
+    $id = $r->input('id');
+    $nama = $r->input('nama');
+    $warna = $r->input('warna');
+    $garansi = $r->input('garansi');
+    $harga = $r->input('harga');
+    $remark = $r->input('remark');
+    $type_garansi = $r->input('type_garansi');
+    $jenis = $r->input('jenis');
+
+    $request = array(
+        "id"=>$id,
+        "nama"=>$nama,
+        "warna"=>$warna,
+        "jenis"=>$jenis,
+        "garansi"=>$garansi,
+        "type_garansi"=>$type_garansi,
+        "harga"=>$harga,
+        "remark"=>$remark
+        );
+    $save =  $this->bsi->editBarang($request);
+    return response()->json($save);
+}
 }
